@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:custom="clr-namespace:CloudCherry.CustomControls;assembly=CloudCherry"
+             xmlns:views="clr-namespace:CloudCherry.Views;assembly=CloudCherry"
+             x:Class="CloudCherry.Views.TopRankingPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <custom:ElevatedStackView BackgroundColor="DarkGoldenrod" Grid.Column="0" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+        <Label Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="Large" TextColor="White" HeightRequest="70"
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+        </custom:ElevatedStackView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Row="1" Grid.Column="0" Margin="5">
+            <Label Text="Sort :" FontSize="Medium" VerticalTextAlignment="Center" Margin="5,0,10,0"/>
+            <custom:CustomRadioButton Text="Score" TextColor="Gray" x:Name="ScoreRadioBtn" Command="{Binding ScoreCheckCommand}" Margin="5,0,10,0"/>
+            <custom:CustomRadioButton Text="Time" TextColor="Gray" x:Name="TimeRadioBtn" Command="{Binding TimeCheckCommand}" Margin="5,0,5,0"/>
+        </StackLayout>
+        <ScrollView Grid.Row="2" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ListView x:Name="ListView"  ItemsSource="{Binding ListRanking}" RowHeight="190" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <views:CardView/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>    
+    </Grid>
+</ContentPage>
